@@ -94,7 +94,7 @@ public class HttpFragment extends Fragment {
         }catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        
+
     }
 
     @OnClick(R.id.download_page_btn)
