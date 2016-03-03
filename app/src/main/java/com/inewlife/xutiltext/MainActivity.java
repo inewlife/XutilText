@@ -40,8 +40,8 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtils.customTagPrefix = "xUtilsSample"; // 方便调试时过滤 adb logcat 输出
-        LogUtils.allowI = false; //关闭 LogUtils.i(...) 的 adb log 输出
+       // LogUtils.customTagPrefix = "xUtilsSample"; // 方便调试时过滤 adb logcat 输出
+       // LogUtils.allowI = false; //关闭 LogUtils.i(...) 的 adb log 输出
 
         ViewUtils.inject(this);
 
