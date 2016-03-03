@@ -21,6 +21,7 @@ public class DownloadService extends Service {
     public static DownloadManager getDownloadManager(Context appContext) {
         if (!DownloadService.isServiceRunning(appContext)) {
             Intent downloadSvr = new Intent("download.service.action");
+            downloadSvr.setPackage("com.inewlife.xutiltext.service");
             appContext.startService(downloadSvr);
         }
         if (DownloadService.DOWNLOAD_MANAGER == null) {

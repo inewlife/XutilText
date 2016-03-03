@@ -1,7 +1,7 @@
 package com.inewlife.xutiltext.fragment;
 
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,6 +35,8 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Created by inewlife on 2016/3/2.。。。
@@ -59,6 +61,10 @@ public class HttpFragment extends Fragment {
     }
     @ViewInject(R.id.download_addr_edit)
     private EditText downloadAddrEdit;
+
+
+
+
     @ViewInject(R.id.download_btn)
     private Button downloadBtn;
 
@@ -70,24 +76,31 @@ public class HttpFragment extends Fragment {
 
     @ResInject(id = R.string.download_label, type = ResType.String)
     private String label;
+
     @OnClick(R.id.download_btn)
     public void download(View view) {
-        String target = "/sdcard/xUtils/" + System.currentTimeMillis() + "lzfile.apk";
+
         try {
+            URL url = new URL(downloadAddrEdit.getText().toString());
+            String target = "/sdcard/xUtils/" +System.currentTimeMillis()+ url.getFile()  ;
             downloadManager.addNewDownload(downloadAddrEdit.getText().toString(),
-                    "力卓文件",
+                    "下载文件",
                     target,
                     true, // 如果目标文件存在，接着未完成的部分继续下载。服务器不支持RANGE时将从新下载。
                     false, // 如果从请求返回信息中获取到文件名，下载完成后自动重命名。
                     null);
         } catch (DbException e) {
             LogUtils.e(e.getMessage(), e);
+        }catch (MalformedURLException e) {
+            e.printStackTrace();
         }
+        
     }
 
     @OnClick(R.id.download_page_btn)
     public void downloadPage(View view) {
         Intent intent = new Intent(this.getActivity(), DownloadListActivity.class);
+        intent.setPackage("com.inewlife.xutiltext");
         this.getActivity().startActivity(intent);
     }
     //@OnClick(R.id.download_btn)
